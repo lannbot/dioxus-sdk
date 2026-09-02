@@ -122,9 +122,7 @@ pub fn use_interval<MaybeAsync: SpawnIfAsync<Marker>, Marker>(
                 interval.tick().await;
 
                 #[cfg(target_family = "wasm")]
-                {
-                    gloo_timers::future::sleep(period).await;
-                }
+                crate::sleep(period).await;
 
                 callback.call(());
             }

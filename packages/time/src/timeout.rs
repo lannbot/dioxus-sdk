@@ -27,11 +27,7 @@ impl<Args> UseTimeout<Args> {
         let duration = self.duration;
 
         let handle = spawn(async move {
-            #[cfg(not(target_family = "wasm"))]
-            tokio::time::sleep(duration).await;
-
-            #[cfg(target_family = "wasm")]
-            gloo_timers::future::sleep(duration).await;
+            crate::sleep(duration).await;
 
             // If this errors then the timeout was likely dropped.
             let _ = sender.send(args).await;
