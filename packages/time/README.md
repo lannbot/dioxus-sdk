@@ -13,6 +13,11 @@ Add `dioxus-sdk-time` to your `Cargo.toml`:
 dioxus-sdk-time = "0.1"
 ```
 
+### Cargo features
+- `wasip3` — on `wasm32` targets, wait on `wasi:clocks/monotonic-clock` (WASIp3)
+  rather than `gloo-timers`, so timing works in a WebAssembly component with no
+  JavaScript host to call `setTimeout` on. No effect on other targets.
+
 Example:
 ```rs
 use dioxus::{logger::tracing::info, prelude::*};
